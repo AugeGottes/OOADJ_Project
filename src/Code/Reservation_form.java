@@ -110,9 +110,9 @@ public class Reservation_form extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel4.setText("To");
 
-        to.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bangalore", "Kolkota", "Delhi", "Mysore", "Mangalore", "Chennai", "Hyderabad", "Mumbai" }));
+        to.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bangalore", "Kolkata", "Delhi", "Mysore", "Mangalore", "Chennai", "Hyderabad", "Mumbai" }));
 
-        from.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bangalore", "Kolkota", "Delhi", "Mysore", "Mangalore", "Chennai", "Hyderabad", "Mumbai" }));
+        from.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bangalore", "Kolkata", "Delhi", "Mysore", "Mangalore", "Chennai", "Hyderabad", "Mumbai" }));
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel7.setText("No of seats required");
@@ -257,7 +257,7 @@ public class Reservation_form extends javax.swing.JFrame {
     }
     else 
     {
-        JOptionPane.showMessageDialog(this,"pls select any facility");
+        JOptionPane.showMessageDialog(this,"You are required to select a facility");
     }
     
       cost.setText(""+h);
@@ -267,19 +267,26 @@ public class Reservation_form extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         
-        String t=(String)to.getSelectedItem();
-        String fr=(String)from.getSelectedItem();
-        String fa=(String)faclevel.getSelectedItem();
+        String t=(String)to.getSelectedItem(); //t for to
+        String fr=(String)from.getSelectedItem(); //fr for where from
+        String fa=(String)faclevel.getSelectedItem(); //facility ac non ac
         String ph=phno.getText();
         String co=cost.getText();
+//        co=Integer.parseInt();
         String na=name.getText();
         String jo=jourdate.getText();
-        String ve=vehno.getText();
+        String ve=vehno.getText();//vehicle no
         String se=seats.getText();
+//        System.out.println(ph);
+//        System.out.println(co);
+//        System.out.println(na);
+//        System.out.println(jo);
+//        System.out.println(ve);
+//        System.out.println(se);
         int seats = Integer.parseInt(se);
-        if(seats > 8)
+        if(seats > 6 )
         {
-             JOptionPane.showMessageDialog(null,"Number of seats should be less than 8");
+             JOptionPane.showMessageDialog(null,"Number of seats should be less than 6");
              this.setVisible(false);
         }
         else
@@ -297,17 +304,27 @@ public class Reservation_form extends javax.swing.JFrame {
                 String b=rs.getString(4);
                 if(a.equals(fr) && b.equals(t))
                 {            
-                s.executeUpdate("insert into details(name,from_place,to_place,facility_level,phno,qty_seats,journey_date,vehicle_no,price)values('"+na+"','"+fr+"','"+t+"','"+fa+"','"+ph+"','"+se+"','"+jo+"','"+ve+"','"+co+"');");
-                s.executeUpdate("insert into bill(name,vehicle_no,from_place,destination,price) values ('"+na+"','"+ve+"','"+fr+"','"+t+"','"+co+"');");
-                s.executeUpdate("update vehicles set status = '"+"BOOKED' where vehicle_no = '"+ve+"'");
-                JOptionPane.showMessageDialog(this,"Your Reservartion has been made! Taking you to the payment page!");
+                s.executeUpdate("insert into details(name,from_place,to_place,facility_level,phno,qty_seats,journey_date,vehicle_no,price)values ('"+na+"','"+fr+"','"+t+"','"+fa+"','"+ph+"','"+se+"','"+jo+"','"+ve+"','"+co+"');");
+//                s.executeUpdate("Create table ")
+//                    String driverName= String.valueOf(s.executeQuery("select * name vehicles where vehicle_no='"+ve+"'"));
+//                    String driverName = String.valueOf(s.executeQuery("SELECT name FROM vehicles WHERE vehicle_no='" + ve + "'"));
+//                    System.out.println("hello the driver name is"+driverName);
+
+//                    s.executeUpdate(
+//                            "INSERT INTO bill (name, vehicle_no, driver_name, from_place, destination, price) " +
+//                                    "VALUES ('" + na + "','" + ve + "','" + driverName + "','" + fr + "','" + t + "'," + co + ");"
+//                    );
+//
+//                    s.executeUpdate("update vehicles set status = '"+"BOOKED' where vehicle_no = '"+ve+"'");
+                JOptionPane.showMessageDialog(this,"Your Reservation has been made! Taking you to the payment page!");
                 this.setVisible(false);
                 new Payment_form().setVisible(true);
                 }
-                else
-                {
-                    JOptionPane.showMessageDialog(null,"Destination and start should be "+b+" & "+a);
-                }
+                ///check if this works
+//                else
+//                {
+//                    JOptionPane.showMessageDialog(null,"Destination and start should be "+b+" & "+a);
+//                }
                 
             }
             else

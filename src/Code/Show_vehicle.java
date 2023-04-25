@@ -206,8 +206,8 @@ public class Show_vehicle extends javax.swing.JFrame {
         try
         {
             Class.forName("java.sql.DriverManager");
-            Connection C=(Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/e_reservations","root","root");
-            Statement s=(Statement)C.createStatement();  
+            Connection C= DriverManager.getConnection("jdbc:mysql://localhost:3306/e_reservations","root","");
+            Statement s= C.createStatement();
             ResultSet rs=s.executeQuery("select * from bill ;");
             while(dtm.getRowCount()>0)
             {

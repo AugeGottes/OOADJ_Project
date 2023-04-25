@@ -7,6 +7,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 
+
 public class Payment_form extends javax.swing.JFrame {
 
     /**
@@ -58,7 +59,7 @@ public class Payment_form extends javax.swing.JFrame {
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jRadioButton2.setText("UPI");
+        jRadioButton2.setText("Debit Card");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton2ActionPerformed(evt);
@@ -75,7 +76,7 @@ public class Payment_form extends javax.swing.JFrame {
 
         buttonGroup1.add(jRadioButton3);
         jRadioButton3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jRadioButton3.setText("Cash/dd/Cheque");
+        jRadioButton3.setText("Cash/UPI");
         jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton3ActionPerformed(evt);
@@ -155,6 +156,9 @@ public class Payment_form extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
+    //**
+    // * Handles the credit card case
+    // */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String pas;
@@ -191,15 +195,15 @@ public class Payment_form extends javax.swing.JFrame {
             try
             {
                 Class.forName("java.sql.DriverManager");
-                Connection c=(Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/e_reservations","root","");
-                Statement s=(Statement)c.createStatement();
+                Connection c= DriverManager.getConnection("jdbc:mysql://localhost:3306/e_reservations","root","");
+                Statement s= c.createStatement();
                 ResultSet rs=s.executeQuery("select *from details where name='"+pas+"';");
                 if(rs.next())
                 {
                     String p=rs.getString(1);
                     if(pas.equals(p))
                     {
-//                        new debit_card_form().setVisible(true);
+                        new debit_card_form().setVisible(true);
                         this.setVisible(false);
                     }
                     else
@@ -212,6 +216,10 @@ public class Payment_form extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    /**
+     * Handling the debit card case
+     * */
 
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
         // TODO add your handling code here:

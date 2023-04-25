@@ -185,13 +185,14 @@ public class credit_form extends javax.swing.JFrame {
                 try
                 {
                     Class.forName("java.sql.DriverManager");
-                    java.sql.Connection C=(java.sql.Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/e_reservations","root","");
-                    java.sql.Statement s=(java.sql.Statement)C.createStatement();
+                    java.sql.Connection C= DriverManager.getConnection("jdbc:mysql://localhost:3306/e_reservations","root","");
+                    java.sql.Statement s= C.createStatement();
+
                     ResultSet rs = s.executeQuery("select * from details where journey_date = '"+d+"' AND vehicle_no = '"+e+"'");
                     if(rs.next())
                     {
                         s.executeUpdate("insert into credit values('"+a+"','"+b+"','"+c+"','"+d+"','"+e+"');");
-                    JOptionPane.showMessageDialog(this,"Your ticket has been booked succesfully! Thank You for Choosing Us and please check your vehicle Number!");
+                    JOptionPane.showMessageDialog(this,"Your ticket has been booked successfully");
                 
                     }
                     else
@@ -228,7 +229,7 @@ public class credit_form extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+                }//what happens here if the look Nimbus is present there or not
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(credit_form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);

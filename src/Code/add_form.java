@@ -5,12 +5,10 @@
  */
 package e_reservation;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -229,11 +227,11 @@ public class add_form extends javax.swing.JFrame {
         try
         {
             Class.forName("java.sql.DriverManager");
-            Connection j=(Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/e_reservations","root","");
-            Statement s=(Statement)j.createStatement();
+            Connection j= DriverManager.getConnection("jdbc:mysql://localhost:3306/e_reservations","root","");
+            Statement s= j.createStatement();
             s.executeUpdate("insert into vehicles(vehicle_name, vehicle_no, from_place, destination, arrival_time, departure_time, facility_level, Driver_Name) values('"+a+"','"+b+"','"+c+"','"+d+"','"+e+"','"+f+"','"+g+"','"+i+"');");
-          
-            s.executeUpdate("insert into bill values () ");
+
+//            s.executeUpdate("insert into bill values () ");
             JOptionPane.showMessageDialog(null,"inserted");
         }
         catch(Exception k)
